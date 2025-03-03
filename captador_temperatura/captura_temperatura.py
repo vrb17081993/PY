@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-EXCEL_FILE = "temperatura.xlsx"
+EXCEL_FILE = r"C:\Users\Vinicius\Documents\PY\captador_temperatura\temperatura.xlsx"
 URL_TEMPO = "https://www.tempo.com/sao-paulo.htm"
 XPATH_TEMPERATURA = "//*[@id='d_hub_1']/div[1]/div/div/div/div/span[1]"
 XPATH_UMIDADE = (
@@ -56,6 +56,9 @@ def obter_dados_climaticos():
 
 # Salva os dados da temperatura e umidade em um arquivo Excel
 def salvar_excel(dados):
+    # Cria o diretório, caso não exista
+    os.makedirs(os.path.dirname(EXCEL_FILE), exist_ok=True)
+
     wb = load_workbook(EXCEL_FILE) if os.path.exists(EXCEL_FILE) else Workbook()
     ws = wb.active
 
